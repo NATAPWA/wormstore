@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Червяк — PWA Store без App Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1b5e20">
+    <link rel="apple-touch-icon" href="img/icon-192.png">
+</head>
+<body>
+    <header>
+        <h1>🐛 Червяк</h1>
+        <p>Магазин приложений без App Store</p>
+        <button id="installBtn" class="hidden">Добавить Червяка на экран</button>
+    </header>
+    <main>
+        <div class="card" data-app="max">
+            <img src="img/max-icon.png" alt="MAX" class="app-icon">
+            <h2>MAX (VK)</h2>
+            <p>Мессенджер с рабочими уведомлениями через PWA.</p>
+            <button class="install-app-btn">Установить</button>
+        </div>
+        <!-- Здесь будут ещё карточки -->
+    </main>
+    <footer>
+        <p>Это не магазин, а проводник. Все приложения — официальные PWA сайтов.</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
