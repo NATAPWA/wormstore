@@ -22,27 +22,44 @@ document.querySelectorAll('.install-app-btn').forEach(btn => {
     });
 });
 
-function showInstallGuide(name, url, hint) {
-    const guide = `
-        📲 Установка ${name}
-        1. Откройте Safari и перейдите на ${url}
-        2. Авторизуйтесь (если нужно)
-        3. Нажмите кнопку «Поделиться» (прямоугольник со стрелкой)
-        4. Выберите «На экран „Домой“»
-        5. Нажмите «Добавить»
-        ✅ После этого ${name} появится как отдельное приложение с уведомлениями.
-        ${hint ? '\n💡 ' + hint : ''}
+function showInstallGuide(appName, appUrl) {
+    // Создаём модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>📲 Установить ${appName}</h3>
+            <p>Нажмите кнопку «Поделиться», затем «На экран Домой».</p>
+            <img src="img/install-guide.png" alt="Инструкция" style="width:100%; border-radius:8px; margin:10px 0;">
+            <button id="shareBtn" class="install-btn-main">📤 Поделиться</button>
+        </div>
     `;
-    alert(guide);
-    // В будущем заменим alert на красивое модальное окно
-document.querySelectorAll('.install-app-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        const app = card.dataset.app;
-        if (app === 'max') {
-            showInstallGuide('MAX', 'https://max.ru');
-        } else if (app === 'vk') {
-            showInstallGuide('VK Мессенджер', 'https://vk.com/messenger');
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+
+    // Закрытие по крестику
+    modal.querySelector('.close-btn').onclick = () => modal.remove();
+    // Закрытие по клику вне окна
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+
+    // Кнопка «Поделиться» вызывает нативное меню
+    modal.querySelector('#shareBtn').onclick = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: `Установите ${appName}`,
+                    url: appUrl
+                });
+                // После шеринга можно закрыть окно, но iOS не даёт отследить выбор «На экран Домой»
+                modal.remove();
+            } catch (err) {
+                console.log('Share cancelled', err);
+            }
+        } else {
+            // Fallback для устройств без Web Share API
+            alert(`Откройте ${appUrl} в Safari → «Поделиться» → «На экран Домой».`);
+            modal.remove();
         }
-    });
-});}
+    };
+}
