@@ -18,14 +18,21 @@
         <button id="installBtn" class="hidden">Добавить Червяка на экран</button>
     </header>
     <main>
+    <div class="app-grid">
         <div class="card" data-app="max">
-            <img src="img/max-icon.png" alt="MAX" class="app-icon">
-            <h2>MAX (VK)</h2>
-            <p>Мессенджер с рабочими уведомлениями через PWA.</p>
+            <img src="img/max-icon.png" alt="MAX" class="app-icon" onerror="this.src='img/icon-192.png'">
+            <h2>MAX</h2>
+            <p>Мессенджер VK с уведомлениями (PWA)</p>
             <button class="install-app-btn">Установить</button>
         </div>
-        <!-- Здесь будут ещё карточки -->
-    </main>
+        <div class="card" data-app="vk">
+            <img src="img/vk-icon.png" alt="VK Мессенджер" class="app-icon" onerror="this.src='img/icon-192.png'">
+            <h2>VK Мессенджер</h2>
+            <p>Официальный клиент ВКонтакте</p>
+            <button class="install-app-btn">Установить</button>
+        </div>
+    </div>
+</main>
     <footer>
         <p>Это не магазин, а проводник. Все приложения — официальные PWA сайтов.</p>
     </footer>
