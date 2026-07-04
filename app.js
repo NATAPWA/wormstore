@@ -35,4 +35,14 @@ function showInstallGuide(name, url, hint) {
     `;
     alert(guide);
     // В будущем заменим alert на красивое модальное окно
-}
+document.querySelectorAll('.install-app-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.card');
+        const app = card.dataset.app;
+        if (app === 'max') {
+            showInstallGuide('MAX', 'https://max.ru');
+        } else if (app === 'vk') {
+            showInstallGuide('VK Мессенджер', 'https://vk.com/messenger');
+        }
+    });
+});}
