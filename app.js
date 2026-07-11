@@ -1,11 +1,12 @@
-// Показываем кнопку "Добавить Червяка на экран", если ещё не в PWA-режиме
-if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
-    // Уже в PWA, скрываем кнопку самомустановки
-    document.getElementById('installBtn').classList.add('hidden');
-} else {
+// Показываем кнопку "Добавить Червяка на экран", если сайт открыт в браузере, а не в PWA
+if (!window.matchMedia('(display-mode: standalone)').matches && !navigator.standalone) {
     document.getElementById('installBtn').classList.remove('hidden');
     document.getElementById('installBtn').addEventListener('click', () => {
-        alert('Нажмите "Поделиться" (квадратик со стрелкой) → "На экран Домой".');
+        showInstallGuide(
+            'Червяк',
+            'https://natapwa.github.io/wormstore/',
+            'Сейчас откроется этот же сайт. Нажмите «Поделиться» → «На экран Домой», чтобы установить магазин.'
+        );
     });
 }
 
@@ -14,27 +15,50 @@ document.querySelectorAll('.install-app-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const card = e.target.closest('.card');
         const app = card.dataset.app;
-        // Пока простая инструкция для MAX, позже сделаем универсальную обёртку
+        let url = '';
+        let name = '';
         if (app === 'max') {
-            showInstallGuide('MAX', 'https://max.ru', 'Чтобы получать уведомления, откройте этот сайт и добавьте на экран «Домой» точно так же.');
+            name = 'MAX';
+            url = 'https://max.ru';
+        } else if (app === 'vk') {
+            name = 'VK Мессенджер';
+            url = 'https://vk.com/messenger';
         }
-        // Здесь можно добавлять другие приложения
+        if (url) {
+            showInstallGuide(name, url, 'Сейчас откроется Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу экрана, затем выберите «На экран Домой» и нажмите «Добавить».');
+        }
     });
 });
 
-document.querySelectorAll('.install-app-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        const app = card.dataset.app;
-        const url = app === 'max' ? 'https://max.ru' : 'https://vk.com/messenger';
+function showInstallGuide(appName, appUrl, instructionText) {
+    // Удаляем предыдущее модальное окно, если есть
+    const oldModal = document.querySelector('.modal');
+    if (oldModal) oldModal.remove();
 
-        // Пробуем открыть системное меню «Поделиться»
-        if (navigator.share) {
-            navigator.share({
-                title: `Установите ${app === 'max' ? 'MAX' : 'VK Мессенджер'}`,
-                url: url
-            }).then(() => {
-                // Показываем мини-подсказку после закрытия меню
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>📲 Установить ${appName}</h3>
+            <p>${instructionText}</p>
+            <button id="goToSafariBtn" class="install-btn-main">Перейти в Safari</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+
+    // Закрытие по крестику
+    modal.querySelector('.close-btn').onclick = () => modal.remove();
+    // Закрытие по клику вне окна
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+
+    // Кнопка "Перейти в Safari"
+    modal.querySelector('#goToSafariBtn').onclick = () => {
+        window.open(appUrl, '_blank');
+        modal.remove();
+    };
+}                // Показываем мини-подсказку после закрытия меню
                 showTooltip('👉 В Safari нажмите «Поделиться» → «На экран Домой»');
             }).catch(() => {});
         } else {
