@@ -23,43 +23,35 @@ document.querySelectorAll('.install-app-btn').forEach(btn => {
 });
 
 function showInstallGuide(appName, appUrl) {
-    // Создаём модальное окно
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3>📲 Установить ${appName}</h3>
-            <p>Нажмите кнопку «Поделиться», затем «На экран Домой».</p>
-            <img src="img/install-guide.png" alt="Инструкция" style="width:100%; border-radius:8px; margin:10px 0;">
-            <button id="shareBtn" class="install-btn-main">📤 Поделиться</button>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>Нажмите кнопку <strong>«Поделиться»</strong> <br>(прямоугольник со стрелкой в Safari)</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Прокрутите вниз и выберите <strong>«На экран Домой»</strong></p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>Нажмите <strong>«Добавить»</strong></p>
+                </div>
+            </div>
+            ${appUrl ? `<p style="margin-top:15px; font-size:0.9em; color:#8b949e;">Ссылка: ${appUrl}</p>` : ''}
+            <button id="closeGuideBtn" class="install-btn-main">Понятно</button>
         </div>
     `;
     document.body.appendChild(modal);
     modal.style.display = 'flex';
 
-    // Закрытие по крестику
+    // Закрытие по крестику, по кнопке «Понятно» и по клику вне окна
     modal.querySelector('.close-btn').onclick = () => modal.remove();
-    // Закрытие по клику вне окна
+    modal.querySelector('#closeGuideBtn').onclick = () => modal.remove();
     modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
-
-    // Кнопка «Поделиться» вызывает нативное меню
-    modal.querySelector('#shareBtn').onclick = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: `Установите ${appName}`,
-                    url: appUrl
-                });
-                // После шеринга можно закрыть окно, но iOS не даёт отследить выбор «На экран Домой»
-                modal.remove();
-            } catch (err) {
-                console.log('Share cancelled', err);
-            }
-        } else {
-            // Fallback для устройств без Web Share API
-            alert(`Откройте ${appUrl} в Safari → «Поделиться» → «На экран Домой».`);
-            modal.remove();
-        }
-    };
 }
