@@ -207,3 +207,17 @@ footer {
 .tooltip.visible {
     opacity: 1;
 }
+.donate-btn {
+    background: #da3633;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px;
+    transition: background 0.2s;
+}
+.donate-btn:hover {
+    background: #c62828;
+}
