@@ -1,7 +1,8 @@
 {
     "name": "Червяк — PWA Store",
     "short_name": "Червяк",
-    "start_url": "/",
+    "start_url": "/wormstore/",
+    "scope": "/wormstore/",
     "display": "standalone",
     "background_color": "#1b1e20",
     "theme_color": "#1b5e20",
