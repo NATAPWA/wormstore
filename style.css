@@ -162,3 +162,29 @@ footer {
     cursor: pointer;
     margin-top: 15px;
 }
+.steps {
+    text-align: left;
+    margin: 15px 0;
+}
+.step {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.step-num {
+    background: #4caf50;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+.step p {
+    margin: 0;
+    color: #c9d1d9;
+}
