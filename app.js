@@ -22,36 +22,37 @@ document.querySelectorAll('.install-app-btn').forEach(btn => {
     });
 });
 
-function showInstallGuide(appName, appUrl) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>📲 Установить ${appName}</h3>
-            <div class="steps">
-                <div class="step">
-                    <span class="step-num">1</span>
-                    <p>Нажмите кнопку <strong>«Поделиться»</strong> <br>(прямоугольник со стрелкой в Safari)</p>
-                </div>
-                <div class="step">
-                    <span class="step-num">2</span>
-                    <p>Прокрутите вниз и выберите <strong>«На экран Домой»</strong></p>
-                </div>
-                <div class="step">
-                    <span class="step-num">3</span>
-                    <p>Нажмите <strong>«Добавить»</strong></p>
-                </div>
-            </div>
-            ${appUrl ? `<p style="margin-top:15px; font-size:0.9em; color:#8b949e;">Ссылка: ${appUrl}</p>` : ''}
-            <button id="closeGuideBtn" class="install-btn-main">Понятно</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-    modal.style.display = 'flex';
+document.querySelectorAll('.install-app-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.card');
+        const app = card.dataset.app;
+        const url = app === 'max' ? 'https://max.ru' : 'https://vk.com/messenger';
 
-    // Закрытие по крестику, по кнопке «Понятно» и по клику вне окна
-    modal.querySelector('.close-btn').onclick = () => modal.remove();
-    modal.querySelector('#closeGuideBtn').onclick = () => modal.remove();
-    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+        // Пробуем открыть системное меню «Поделиться»
+        if (navigator.share) {
+            navigator.share({
+                title: `Установите ${app === 'max' ? 'MAX' : 'VK Мессенджер'}`,
+                url: url
+            }).then(() => {
+                // Показываем мини-подсказку после закрытия меню
+                showTooltip('👉 В Safari нажмите «Поделиться» → «На экран Домой»');
+            }).catch(() => {});
+        } else {
+            // Fallback для десктопа: просто открываем сайт в новой вкладке
+            window.open(url, '_blank');
+            showTooltip('Откройте в Safari → «Поделиться» → «На экран Домой»');
+        }
+    });
+});
+
+function showTooltip(text) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = text;
+    document.body.appendChild(tooltip);
+    setTimeout(() => tooltip.classList.add('visible'), 10);
+    setTimeout(() => {
+        tooltip.classList.remove('visible');
+        setTimeout(() => tooltip.remove(), 300);
+    }, 3000);
 }
