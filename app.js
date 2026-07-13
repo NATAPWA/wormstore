@@ -1,118 +1,80 @@
-// ========== ЛОГИКА УСТАНОВКИ САМОГО ЧЕРВЯКА ==========
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-
-// Показываем кнопку "Добавить Червяка на экран" только в обычном браузере
-if (!isStandalone) {
+// ========== Установка самого Червяка ==========
+(function() {
     const installBtn = document.getElementById('installBtn');
-    if (installBtn) {
+    // Проверяем, не в PWA ли мы уже (если да — кнопку не показываем)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+    if (installBtn && !isStandalone) {
         installBtn.classList.remove('hidden');
-        installBtn.addEventListener('click', () => {
-            showInstallGuide(
-                'Червяк',
-                'https://natapwa.github.io/wormstore/',
-                'Сейчас откроется этот же сайт в Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу, затем выберите «На экран Домой» и «Добавить».'
+        installBtn.addEventListener('click', function() {
+            showModal(
+                'Установите Червяк',
+                'Сейчас откроется этот же сайт в Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу экрана, затем выберите «На экран Домой» и «Добавить».',
+                'https://natapwa.github.io/wormstore/'
             );
         });
     }
-}
+})();
 
-// ========== ОБРАБОТЧИКИ ДЛЯ ПРИЛОЖЕНИЙ (работают всегда) ==========
-document.querySelectorAll('.install-app-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        const app = card.dataset.app;
-        let url = '';
-        let name = '';
-        if (app === 'max') {
-            name = 'MAX';
-            url = 'https://max.ru';
-        } else if (app === 'vk') {
-            name = 'VK Мессенджер';
-            url = 'https://vk.com/messenger';
-        }
-        if (url) {
-            showInstallGuide(
-                name,
-                url,
-                'Сейчас откроется Safari. Нажмите кнопку «Поделиться» (прямоугольник со стрелкой) внизу экрана, затем выберите «На экран Домой» и нажмите «Добавить».'
-            );
-        }
-    });
-});
+// ========== Установка приложений (MAX, VK) ==========
+(function() {
+    // Ждём, пока DOM загрузится (на всякий случай)
+    function bindButtons() {
+        var buttons = document.querySelectorAll('.install-app-btn');
+        buttons.forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                var card = e.target.closest('.card');
+                if (!card) return;
+                var app = card.getAttribute('data-app');
+                var url = '';
+                var name = '';
+                if (app === 'max') {
+                    name = 'MAX';
+                    url = 'https://max.ru';
+                } else if (app === 'vk') {
+                    name = 'VK Мессенджер';
+                    url = 'https://vk.com/messenger';
+                }
+                if (url) {
+                    showModal(
+                        'Установите ' + name,
+                        'Сейчас откроется Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу, затем выберите «На экран Домой» и нажмите «Добавить».',
+                        url
+                    );
+                }
+            });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindButtons);
+    } else {
+        bindButtons();
+    }
+})();
 
-// ========== ФУНКЦИЯ МОДАЛЬНОГО ОКНА ==========
-function showInstallGuide(appName, appUrl, instructionText) {
-    // Удаляем предыдущее окно, если есть
-    const oldModal = document.querySelector('.modal');
-    if (oldModal) oldModal.remove();
+// ========== Функция показа модального окна ==========
+function showModal(title, text, url) {
+    // Удаляем старое окно, если есть
+    var old = document.querySelector('.modal');
+    if (old) old.remove();
 
-    const modal = document.createElement('div');
+    var modal = document.createElement('div');
     modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>📲 Установить ${appName}</h3>
-            <p>${instructionText}</p>
-            <button id="goToSafariBtn" class="install-btn-main">Перейти в Safari</button>
-        </div>
-    `;
+    modal.innerHTML = '<div class="modal-content">' +
+        '<span class="close-btn">&times;</span>' +
+        '<h3>' + title + '</h3>' +
+        '<p>' + text + '</p>' +
+        '<button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button>' +
+    '</div>';
     document.body.appendChild(modal);
     modal.style.display = 'flex';
 
     // Закрытие по крестику
-    modal.querySelector('.close-btn').addEventListener('click', () => modal.remove());
+    modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
     // Закрытие по клику вне окна
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
-    });
-    // Переход в Safari
-    modal.querySelector('#goToSafariBtn').addEventListener('click', () => {
-        window.open(appUrl, '_blank');
-        modal.remove();
-    });
-}
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>📲 Установить ${appName}</h3>
-            <p>${instructionText}</p>
-            <button id="goToSafariBtn" class="install-btn-main">Перейти в Safari</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-    modal.style.display = 'flex';
-
-    // Закрытие по крестику
-    modal.querySelector('.close-btn').onclick = () => modal.remove();
-    // Закрытие по клику вне окна
-    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
-
-    // Кнопка "Перейти в Safari"
-    modal.querySelector('#goToSafariBtn').onclick = () => {
-        window.open(appUrl, '_blank');
+    modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
+    // Кнопка перехода
+    modal.querySelector('#goToSafariBtn').onclick = function() {
+        window.open(url, '_blank');
         modal.remove();
     };
-}                // Показываем мини-подсказку после закрытия меню
-                showTooltip('👉 В Safari нажмите «Поделиться» → «На экран Домой»');
-            }).catch(() => {});
-        } else {
-            // Fallback для десктопа: просто открываем сайт в новой вкладке
-            window.open(url, '_blank');
-            showTooltip('Откройте в Safari → «Поделиться» → «На экран Домой»');
-        }
-    });
-});
-
-function showTooltip(text) {
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = text;
-    document.body.appendChild(tooltip);
-    setTimeout(() => tooltip.classList.add('visible'), 10);
-    setTimeout(() => {
-        tooltip.classList.remove('visible');
-        setTimeout(() => tooltip.remove(), 300);
-    }, 3000);
 }
