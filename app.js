@@ -52,32 +52,24 @@
 })();
 
 // ========== Функция показа модального окна ==========
-function showModal(title, text, url) {
-    var old = document.querySelector('.modal');
-    if (old) old.remove();
+// В функции для Червяка
+showModal(
+    'Установите Червяк',
+    'Сейчас откроется браузер Safari.<br><br>' +
+    '<b>1.</b> Внизу экрана нажмите кнопку <b>«Поделиться»</b> (прямоугольник со стрелкой вверх).<br>' +
+    '<b>2.</b> Прокрутите вниз и выберите <b>«На экран Домой»</b>.<br>' +
+    '<b>3.</b> Нажмите <b>«Добавить»</b> в правом верхнем углу.<br><br>' +
+    'Готово! Иконка магазина появится на рабочем столе.',
+    'https://natapwa.github.io/wormstore/'
+);
 
-    var modal = document.createElement('div');
-    modal.className = 'modal';
-    var modalHTML = '<div class="modal-content">' +
-        '<span class="close-btn">&times;</span>' +
-        '<h3>' + title + '</h3>' +
-        '<p>' + text + '</p>';
-
-    // Если есть картинка-инструкция, вставляем её
-    // путь: img/install-guide.png
-    modalHTML += '<img src="img/install-guide.png" alt="Инструкция" style="width:100%; max-width:250px; margin:10px auto; display:block; border-radius:12px;" onerror="this.style.display=\'none\'">';
-
-    modalHTML += '<button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button>' +
-    '</div>';
-
-    modal.innerHTML = modalHTML;
-    document.body.appendChild(modal);
-    modal.style.display = 'flex';
-
-    modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
-    modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
-    modal.querySelector('#goToSafariBtn').onclick = function() {
-        window.open(url, '_blank');
-        modal.remove();
-    };
-}
+// В функции для MAX и VK (обе одинаковые)
+showModal(
+    'Установите ' + name,
+    'Сейчас откроется сайт в Safari.<br><br>' +
+    '<b>1.</b> Внизу экрана нажмите кнопку <b>«Поделиться»</b> (прямоугольник со стрелкой вверх).<br>' +
+    '<b>2.</b> Прокрутите вниз и выберите <b>«На экран Домой»</b>.<br>' +
+    '<b>3.</b> Нажмите <b>«Добавить»</b> в правом верхнем углу.<br><br>' +
+    'После этого приложение будет работать как обычное, с уведомлениями.',
+    url
+);
