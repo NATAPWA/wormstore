@@ -1,7 +1,6 @@
 // ========== Установка самого Червяка ==========
 (function() {
     const installBtn = document.getElementById('installBtn');
-    // Проверяем, не в PWA ли мы уже (если да — кнопку не показываем)
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
     if (installBtn && !isStandalone) {
         installBtn.classList.remove('hidden');
@@ -17,7 +16,6 @@
 
 // ========== Установка приложений (MAX, VK) ==========
 (function() {
-    // Ждём, пока DOM загрузится (на всякий случай)
     function bindButtons() {
         var buttons = document.querySelectorAll('.install-app-btn');
         buttons.forEach(function(btn) {
@@ -53,7 +51,6 @@
 
 // ========== Функция показа модального окна ==========
 function showModal(title, text, url) {
-    // Удаляем старое окно, если есть
     var old = document.querySelector('.modal');
     if (old) old.remove();
 
@@ -68,11 +65,8 @@ function showModal(title, text, url) {
     document.body.appendChild(modal);
     modal.style.display = 'flex';
 
-    // Закрытие по крестику
     modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
-    // Закрытие по клику вне окна
     modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
-    // Кнопка перехода
     modal.querySelector('#goToSafariBtn').onclick = function() {
         window.open(url, '_blank');
         modal.remove();
