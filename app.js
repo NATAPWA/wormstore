@@ -7,7 +7,8 @@
         installBtn.addEventListener('click', function() {
             showModal(
                 'Установите Червяк',
-                'Сейчас откроется этот же сайт в Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу экрана, затем выберите «На экран Домой» и «Добавить».',
+                'Сейчас откроется сайт Червяка в Safari.Нажмите кнопку «Поделиться» (прямоугольник со стрелкой вверх) в нижнем меню,затем прокрутите вниз и выберите «На экран Домой».
+                Нажмите «Добавить» — и магазин появится на главном экране.',
                 'https://natapwa.github.io/wormstore/'
             );
         });
@@ -35,7 +36,8 @@
                 if (url) {
                     showModal(
                         'Установите ' + name,
-                        'Сейчас откроется Safari. Нажмите «Поделиться» (прямоугольник со стрелкой) внизу, затем выберите «На экран Домой» и нажмите «Добавить».',
+                        ''Сейчас откроется сайт Червяка в Safari.Нажмите кнопку «Поделиться» (прямоугольник со стрелкой вверх) в нижнем меню,затем прокрутите вниз и выберите «На экран Домой».
+                        Нажмите «Добавить» — и магазин появится на главном экране.'',
                         url
                     );
                 }
@@ -56,12 +58,19 @@ function showModal(title, text, url) {
 
     var modal = document.createElement('div');
     modal.className = 'modal';
-    modal.innerHTML = '<div class="modal-content">' +
+    var modalHTML = '<div class="modal-content">' +
         '<span class="close-btn">&times;</span>' +
         '<h3>' + title + '</h3>' +
-        '<p>' + text + '</p>' +
-        '<button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button>' +
+        '<p>' + text + '</p>';
+
+    // Если есть картинка-инструкция, вставляем её
+    // путь: img/install-guide.png
+    modalHTML += '<img src="img/install-guide.png" alt="Инструкция" style="width:100%; max-width:250px; margin:10px auto; display:block; border-radius:12px;" onerror="this.style.display=\'none\'">';
+
+    modalHTML += '<button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button>' +
     '</div>';
+
+    modal.innerHTML = modalHTML;
     document.body.appendChild(modal);
     modal.style.display = 'flex';
 
