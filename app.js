@@ -1,3 +1,4 @@
+// ========== Установка самого Червяка ==========
 (function() {
     var installBtn = document.getElementById('installBtn');
     var isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
@@ -6,13 +7,14 @@
         installBtn.addEventListener('click', function() {
             showModal(
                 'Установите Червяк',
-                'Сейчас откроется Safari. Нажмите кнопку Поделиться (прямоугольник со стрелкой) внизу экрана, затем выберите На экран Домой и нажмите Добавить.',
+                'Сейчас откроется Safari. Нажмите кнопку "Поделиться" (прямоугольник со стрелкой) внизу экрана, затем выберите "На экран Домой" и нажмите "Добавить".',
                 'https://natapwa.github.io/wormstore/'
             );
         });
     }
 })();
 
+// ========== Установка приложений (MAX, VK) ==========
 (function() {
     function bindButtons() {
         var buttons = document.querySelectorAll('.install-app-btn');
@@ -33,7 +35,7 @@
                 if (url) {
                     showModal(
                         'Установите ' + name,
-                        'Сейчас откроется Safari. Нажмите кнопку Поделиться (прямоугольник со стрелкой) внизу экрана, затем выберите На экран Домой и нажмите Добавить.',
+                        'Сейчас откроется Safari. Нажмите кнопку "Поделиться" (прямоугольник со стрелкой) внизу экрана, затем выберите "На экран Домой" и нажмите "Добавить".',
                         url
                     );
                 }
@@ -47,14 +49,22 @@
     }
 })();
 
+// ========== Функция показа модального окна ==========
 function showModal(title, text, url) {
     var old = document.querySelector('.modal');
     if (old) old.remove();
+
     var modal = document.createElement('div');
     modal.className = 'modal';
-    modal.innerHTML = '<div class="modal-content"><span class="close-btn">&times;</span><h3>' + title + '</h3><p>' + text + '</p><button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button></div>';
+    modal.innerHTML = '<div class="modal-content">' +
+        '<span class="close-btn">&times;</span>' +
+        '<h3>' + title + '</h3>' +
+        '<p>' + text + '</p>' +
+        '<button class="install-btn-main" id="goToSafariBtn">Перейти в Safari</button>' +
+    '</div>';
     document.body.appendChild(modal);
     modal.style.display = 'flex';
+
     modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
     modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
     modal.querySelector('#goToSafariBtn').onclick = function() {
