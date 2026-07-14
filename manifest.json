@@ -1,6 +1,6 @@
 {
-    "name": "Червяк — PWA Store",
-    "short_name": "Червяк",
+    "name": "Червяк Jobs — PWA Store",
+    "short_name": "Червяк Jobs",
     "start_url": "/wormstore/",
     "scope": "/wormstore/",
     "display": "standalone",
