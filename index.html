@@ -3,46 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Червяк — PWA Store без App Store</title>
+    <title>Червяк — PWA Store</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
-    <meta name="mobile-web-app-capable" content="yes">   <!-- новая -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1b5e20">
+    <meta name="theme-color" content="#0d1117">
     <link rel="icon" href="img/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="img/icon-192.png">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 <body>
     <header>
-    <h1>🐛 Червяк</h1>
-        <p>Магазин приложений без App Store</p>
-        <button id="installBtn" class="hidden">Добавить Червяка на экран</button>
+        <h1>🐛 Червяк</h1>
+        <p>Народный PWA-магазин</p>
+        <button id="installBtn" class="hidden install-main-btn">Добавить Червяка на экран</button>
     </header>
     <main>
-    <div class="app-grid">
-        <div class="card" data-app="max">
-            <img src="img/max-icon.png" alt="MAX" class="app-icon" onerror="this.src='img/icon-192.png'">
-            <h2>MAX</h2>
-            <p>Мессенджер VK с уведомлениями (PWA)</p>
-            <button class="install-app-btn">Установить</button>
+        <div class="app-grid">
+            <!-- Карточка MAX -->
+            <div class="card" data-app="max">
+                <img src="img/max-icon.png" alt="MAX" class="app-icon" onerror="this.src='img/icon-192.png'">
+                <h2>MAX</h2>
+                <p>Мессенджер VK с уведомлениями</p>
+                <button class="install-app-btn">Установить</button>
+            </div>
+            <!-- Карточка VK Мессенджер -->
+            <div class="card" data-app="vk">
+                <img src="img/vk-icon.png" alt="VK Мессенджер" class="app-icon" onerror="this.src='img/icon-192.png'">
+                <h2>VK Мессенджер</h2>
+                <p>Официальный клиент ВКонтакте</p>
+                <button class="install-app-btn">Установить</button>
+            </div>
         </div>
-        <div class="card" data-app="vk">
-            <img src="img/vk-icon.png" alt="VK Мессенджер" class="app-icon" onerror="this.src='img/icon-192.png'">
-            <h2>VK Мессенджер</h2>
-            <p>Официальный клиент ВКонтакте</p>
-            <button class="install-app-btn">Установить</button>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://www.donationalerts.com/r/natapwa" target="_blank" class="donate-btn">❤️ Поддержать проект</a>
         </div>
-    </div>
-       <div style="text-align: center; margin: 30px 0;">
-    <a href="https://www.donationalerts.com/r/natapwa" target="_blank" class="donate-btn">❤️ Поддержать проект</a>
-</div> 
-</main>
+    </main>
     <footer>
-         <p>🐛 Червяк грызёт яблоко санкций. Народный PWA-магазин.</p>
+        <p>🐛 Червяк грызёт яблоко санкций. Народный PWA-магазин.</p>
     </footer>
     <script src="app.js"></script>
 </body>
