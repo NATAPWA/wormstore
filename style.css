@@ -221,3 +221,183 @@ footer {
 .donate-btn:hover {
     background: #c62828;
 }
+/* === ВЕСЁЛЫЙ ЧЕРВЯК === */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0d1117 0%, #1b1e20 100%);
+    color: #c9d1d9;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* Анимированный заголовок с червячком */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+h1 {
+    font-size: 3em;
+    margin: 0;
+    background: linear-gradient(135deg, #4caf50, #ffeb3b, #4caf50);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease infinite;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Карточки приложений */
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.card {
+    background: #161b22;
+    border: 2px solid #30363d;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.card:hover {
+    border-color: #4caf50;
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+/* Эффект "ползущего червяка" при наведении (тонкая зелёная полоска) */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #4caf50;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+.card:hover::after {
+    transform: scaleX(1);
+}
+
+.app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    background: #fff;
+    border: 2px solid #30363d;
+}
+
+button {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+button:active {
+    transform: scale(0.95);
+    background: #2ea043;
+}
+
+/* Кнопка "Добавить Червяка" */
+#installBtn {
+    background: #da3633;
+    margin: 20px auto;
+    display: block;
+    max-width: 300px;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(218, 54, 51, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(218, 54, 51, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(218, 54, 51, 0); }
+}
+
+/* Кнопка "Поддержать" */
+.donate-btn {
+    background: #da3633;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px;
+    transition: background 0.2s, transform 0.2s;
+}
+.donate-btn:hover {
+    background: #c62828;
+    transform: scale(1.05);
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background: #1b1e20;
+    border: 2px solid #4caf50;
+    border-radius: 24px;
+    padding: 24px;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    color: #e0e0e0;
+    animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Подсказка (tooltip) */
+.tooltip {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1b5e20;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.tooltip.visible {
+    opacity: 1;
+}
