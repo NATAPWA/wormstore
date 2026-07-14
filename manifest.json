@@ -4,9 +4,9 @@
     "start_url": "/wormstore/",
     "scope": "/wormstore/",
     "display": "standalone",
-    "background_color": "#1b1e20",
-    "theme_color": "#1b5e20",
-    "description": "Магазин приложений в обход App Store через PWA.",
+    "background_color": "#0d1117",
+    "theme_color": "#0d1117",
+    "description": "Народный PWA-магазин в обход App Store.",
     "icons": [
         {
             "src": "img/icon-192.png",
