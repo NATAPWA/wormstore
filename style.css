@@ -1,222 +1,7 @@
-body {
-    background-color: #0d1117;
-    background-image: radial-gradient(circle at 20% 30%, rgba(76, 175, 80, 0.08) 0%, transparent 30%),
-                      radial-gradient(circle at 80% 70%, rgba(255, 235, 59, 0.06) 0%, transparent 40%);
-    /* остальное остаётся */
-}
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-h1 {
-    font-family: 'Neucha', cursive;
-    font-size: 3.5em;
-    letter-spacing: 2px;
-}
-header p {
-    color: #8b949e;
-    margin-top: 5px;
-}
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 16px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-..card {
-    background: #1b1e20;
-    border: 2px solid #30363d;
-    border-radius: 24px 8px 24px 8px; /* неровные края, как укус */
-    /* ... */
-    transition: all 0.3s ease;
-}
-.card:hover {
-    border-color: #4caf50;
-    transform: translateY(-8px) rotate(1deg);
-    box-shadow: 0 12px 20px rgba(76, 175, 80, 0.4);
-}
-.app-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
-    margin-bottom: 12px;
-    background: #fff;
-}
-.card h2 {
-    font-family: 'Neucha', cursive;
-    font-size: 1.4em;
-    color: #ffeb3b;
-}
-.card p {
-    font-size: 0.8em;
-    color: #8b949e;
-    flex: 1;
-}
-button {
-    background: #238636;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-}
-button:active {
-    background: #2ea043;
-}
-.install-btn-main {
-    background: #1b5e20;
-    margin: 20px auto;
-    display: block;
-    max-width: 300px;
-}
-footer {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 12px;
-    color: #484f58;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-.modal-content {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 16px;
-    padding: 24px;
-    max-width: 320px;
-    text-align: left;
-    color: #c9d1d9;
-}
-.modal-content h3 {
-    margin-top: 0;
-    color: #4caf50;
-}
-.close-btn {
-    float: right;
-    background: none;
-    border: none;
-    color: #8b949e;
-    font-size: 24px;
-    cursor: pointer;
-    width: auto;
-    margin: 0;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-.modal-content {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 16px;
-    padding: 24px;
-    max-width: 320px;
-    width: 90%;
-    text-align: center;
-    color: #c9d1d9;
-}
-.modal-content h3 {
-    margin-top: 0;
-    color: #4caf50;
-}
-.close-btn {
-    float: right;
-    background: none;
-    border: none;
-    color: #8b949e;
-    font-size: 24px;
-    cursor: pointer;
-}
-#shareBtn {
-    background: #238636;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-}
-.steps {
-    text-align: left;
-    margin: 15px 0;
-}
-.step {
-    display: flex;
-    align-items: start;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-.step-num {
-    background: #4caf50;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-.step p {
-    margin: 0;
-    color: #c9d1d9;
-}
-.tooltip {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1b5e20;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    white-space: nowrap;
-}
-.tooltip.visible {
-    opacity: 1;
-}
-.donate-btn {
-    background: #da3633;
-    color: white;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin: 10px;
-    transition: background 0.2s;
-}
-.donate-btn:hover {
-    background: #c62828;
-}
-/* === ВЕСЁЛЫЙ ЧЕРВЯК === */
+/* === Базовый стиль === */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0d1117 0%, #1b1e20 100%);
+    background: #0d1117;
     color: #c9d1d9;
     margin: 0;
     padding: 20px;
@@ -224,67 +9,46 @@ body {
     min-height: 100vh;
 }
 
-/* Анимированный заголовок с червячком */
 header {
     text-align: center;
     margin-bottom: 30px;
 }
+
 h1 {
-    font-size: 3em;
+    font-size: 2.5em;
     margin: 0;
-    background: linear-gradient(135deg, #4caf50, #ffeb3b, #4caf50);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 3s ease infinite;
-}
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    color: #4caf50;
 }
 
-/* Карточки приложений */
+header p {
+    color: #8b949e;
+    margin-top: 5px;
+}
+
+/* Сетка карточек */
 .app-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 16px;
     max-width: 900px;
     margin: 0 auto;
 }
+
+/* Карточка приложения */
 .card {
     background: #161b22;
-    border: 2px solid #30363d;
-    border-radius: 20px;
+    border: 1px solid #30363d;
+    border-radius: 16px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    position: relative;
+    transition: border-color 0.2s;
     overflow: hidden;
 }
 .card:hover {
     border-color: #4caf50;
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-}
-/* Эффект "ползущего червяка" при наведении (тонкая зелёная полоска) */
-.card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: #4caf50;
-    transform: scaleX(0);
-    transition: transform 0.3s;
-}
-.card:hover::after {
-    transform: scaleX(1);
 }
 
 .app-icon {
@@ -293,48 +57,47 @@ h1 {
     border-radius: 16px;
     margin-bottom: 12px;
     background: #fff;
-    border: 2px solid #30363d;
 }
 
+.card h2 {
+    font-size: 1.1em;
+    margin: 0 0 5px;
+    color: #e6edf3;
+}
+
+.card p {
+    font-size: 0.85em;
+    color: #8b949e;
+    flex: 1;
+}
+
+/* Кнопки */
 button {
     background: #238636;
     color: white;
-    border: none;            /* убираем жёлтую обводку */
-    font-weight: 600;
-    text-transform: none;
-    font-size: 16px;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
     margin-top: 10px;
     width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    transition: background 0.2s;
 }
-.donate-btn {
-    background: #da3633;
+button:active {
+    background: #2ea043;
 }
 
-/* Кнопка "Добавить Червяка" */
-#installBtn {
-    background: #da3633;
-    margin: 20px auto;
-    display: block;
+.install-main-btn {
+    background: #1b5e20;
     max-width: 300px;
-    animation: pulse 2s infinite;
-    #installBtn {
-    animation: pulse 2s infinite, shake 0.5s ease-in-out 3s infinite;
+    display: block;
+    margin: 20px auto;
 }
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-3px); }
-    75% { transform: translateX(3px); }
-}
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(218, 54, 51, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(218, 54, 51, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(218, 54, 51, 0); }
+
+.hidden {
+    display: none;
 }
 
 /* Кнопка "Поддержать" */
@@ -346,12 +109,10 @@ button {
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
-    margin: 10px;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s;
 }
 .donate-btn:hover {
-   background: #fdd835;
-    transform: scale(1.05);
+    background: #c62828;
 }
 
 /* Модальное окно */
@@ -363,40 +124,45 @@ button {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(5px);
 }
 .modal-content {
     background: #1b1e20;
-    border: 2px solid #4caf50;
-    border-radius: 24px;
+    border: 1px solid #30363d;
+    border-radius: 16px;
     padding: 24px;
-    max-width: 360px;
+    max-width: 320px;
     width: 90%;
     text-align: center;
     color: #e0e0e0;
-    animation: slideUp 0.3s ease;
 }
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.modal-content h3 {
+    margin-top: 0;
+    color: #4caf50;
+}
+.close-btn {
+    float: right;
+    background: none;
+    border: none;
+    color: #8b949e;
+    font-size: 24px;
+    cursor: pointer;
+}
+#goToSafariBtn {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
 }
 
-/* Подсказка (tooltip) */
-.tooltip {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1b5e20;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-.tooltip.visible {
-    opacity: 1;
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: #484f58;
 }
