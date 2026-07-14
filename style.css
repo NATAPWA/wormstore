@@ -17,12 +17,17 @@ header {
 h1 {
     font-size: 2.5em;
     margin: 0;
-    color: #4caf50;
+    background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00cc44, #0088ff, #8800ff, #ff0000);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow 5s linear infinite;
 }
 
-header p {
-    color: #8b949e;
-    margin-top: 5px;
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
 }
 
 /* Сетка карточек */
