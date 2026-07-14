@@ -169,3 +169,6 @@ footer {
 .card h2 {
     color: #e6edf3 !important;
 }
+button {
+    box-sizing: border-box;
+}
