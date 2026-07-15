@@ -23,6 +23,7 @@
                 var card = e.target.closest('.card');
                 if (!card) return;
                 var app = card.getAttribute('data-app');
+                if (!app) return;
                 var url = '';
                 var name = '';
 
@@ -56,6 +57,9 @@
                 } else if (app === 'dzen') {
                     name = 'Дзен';
                     url = 'https://dzen.ru';
+                } else {
+                    // Неизвестное приложение — игнорируем без ошибки
+                    return;
                 }
 
                 if (url) {
@@ -94,7 +98,14 @@ function showModal(title, text, url) {
     modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
     modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
     modal.querySelector('#goToSafariBtn').onclick = function() {
-        window.open(url, '_blank');
+        // Открываем ссылку через создание элемента <a> — работает везде
+        var a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
         modal.remove();
     };
 }
