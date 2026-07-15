@@ -53,7 +53,7 @@
                     url = 'https://www.avito.ru';
                 } else if (app === 'youmoney') {
                     name = 'ЮMoney';
-                    url = 'https://money.yandex.ru';
+                    url = 'https://yoomoney.ru/';
                 } else if (app === 'dzen') {
                     name = 'Дзен';
                     url = 'https://dzen.ru';
