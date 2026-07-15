@@ -27,7 +27,7 @@
                 var name = '';
                 if (app === 'max') {
                     name = 'MAX';
-                    url = 'https://max.ru';
+                    url = 'https://web.max.ru';
                 } else if (app === 'vk') {
                     name = 'VK Мессенджер';
                     url = 'https://vk.com/messenger';
