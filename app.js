@@ -32,6 +32,31 @@
                     name = 'VK Мессенджер';
                     url = 'https://vk.com/messenger';
                 }
+                } else if (app === 'sberbank') {
+    name = 'СберБанк Онлайн';
+    url = 'https://online.sberbank.ru';
+} else if (app === 'gosuslugi') {
+    name = 'Госуслуги';
+    url = 'https://www.gosuslugi.ru';
+} else if (app === 'yandexmaps') {
+    name = 'Яндекс.Карты';
+    url = 'https://yandex.ru/maps';
+} else if (app === 'ozon') {
+    name = 'Ozon';
+    url = 'https://ozon.ru';
+} else if (app === 'wildberries') {
+    name = 'Wildberries';
+    url = 'https://wildberries.ru';
+} else if (app === 'avito') {
+    name = 'Авито';
+    url = 'https://www.avito.ru';
+} else if (app === 'youmoney') {
+    name = 'ЮMoney';
+    url = 'https://money.yandex.ru';
+} else if (app === 'dzen') {
+    name = 'Дзен';
+    url = 'https://dzen.ru';
+}
                 if (url) {
                     showModal(
                         'Установите ' + name,
