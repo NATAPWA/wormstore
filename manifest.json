@@ -1,8 +1,8 @@
 {
     "name": "Червяк Jobs — PWA Store",
     "short_name": "Червяк Jobs",
-    "start_url": "/wormstore/",
-    "scope": "/wormstore/",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#0d1117",
     "theme_color": "#0d1117",
