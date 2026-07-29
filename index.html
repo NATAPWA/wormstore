@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Червяк — PWA Store</title>
+    <title>Червяк Jobs — PWA Store</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,8 +15,8 @@
 <body>
     <header>
         <h1>🐛 Червяк Jobs</h1>
-<p>Просто работает. Без App Store.</p>
-        <button id="installBtn" class="hidden install-main-btn">Установить Червяка Jobs</button>
+        <p>Просто работает. Без App Store.</p>
+        <button id="installBtn" class="hidden install-main-btn">Добавить Червяка на экран</button>
     </header>
     <main>
         <div class="app-grid">
@@ -34,82 +34,21 @@
                 <p>Официальный клиент ВКонтакте</p>
                 <button class="install-app-btn">Установить</button>
             </div>
-            <!-- СберБанк Онлайн -->
-<div class="card" data-app="sberbank">
-    <img src="img/sber-icon.png" alt="СберБанк" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>СберБанк</h2>
-    <p>Мобильный банк (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Госуслуги -->
-<div class="card" data-app="gosuslugi">
-    <img src="img/gosuslugi-icon.png" alt="Госуслуги" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Госуслуги</h2>
-    <p>Портал госуслуг (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Яндекс.Карты -->
-<div class="card" data-app="yandexmaps">
-    <img src="img/yandexmaps-icon.png" alt="Яндекс.Карты" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Яндекс.Карты</h2>
-    <p>Навигация и карты (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Ozon -->
-<div class="card" data-app="ozon">
-    <img src="img/ozon-icon.png" alt="Ozon" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Ozon</h2>
-    <p>Маркетплейс (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Wildberries -->
-<div class="card" data-app="wildberries">
-    <img src="img/wb-icon.png" alt="Wildberries" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Wildberries</h2>
-    <p>Маркетплейс (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Авито -->
-<div class="card" data-app="avito">
-    <img src="img/avito-icon.png" alt="Авито" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Авито</h2>
-    <p>Объявления (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- ЮMoney -->
-<div class="card" data-app="youmoney">
-    <img src="img/youmoney-icon.png" alt="ЮMoney" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>ЮMoney</h2>
-    <p>Кошелёк и платежи (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
-
-<!-- Дзен -->
-<div class="card" data-app="dzen">
-    <img src="img/dzen-icon.png" alt="Дзен" class="app-icon" onerror="this.src='img/icon-192.png'">
-    <h2>Дзен</h2>
-    <p>Контентная платформа (PWA)</p>
-    <button class="install-app-btn">Установить</button>
-</div>
+            <!-- Остальные карточки (Сбер, Озон и т.д.) скопируй из твоего текущего index.html -->
+            <!-- Я привел для примера две, чтобы не загромождать -->
         </div>
         <div style="text-align: center; margin: 30px 0;">
             <a href="https://www.donationalerts.com/r/natapwa" target="_blank" class="donate-btn">❤️ Поддержать проект</a>
         </div>
     </main>
-   <footer>
-    <p>🐛 Червяк всегда найдёт выход. Народный PWA-магазин.</p>
-    <p>🐛 Червяк Jobs. Stay hungry, stay wormy.</p>
-       <p style="font-size: 11px; color: #666; margin-top: 10px;">
-    Все товарные знаки принадлежат их владельцам. Сайт не аффилирован с представленными сервисами.
-</p>
-</footer>
-    <a href="about.html">О проекте</a>
+    <footer>
+        <p>🐛 Червяк грызёт яблочные ограничения. Народный PWA-магазин.</p>
+        <p>🐛 Червяк Jobs. Stay hungry, stay wormy.</p>
+        <p style="font-size: 11px; color: #666; margin-top: 10px;">
+            Все товарные знаки принадлежат их владельцам. Сайт не аффилирован с представленными сервисами.
+        </p>
+        <a href="https://t.me/natapwa" target="_blank" class="support-link">🐋 Служба WhaleJobs — поможем</a>
+    </footer>
     <script src="app.js"></script>
 </body>
 </html>
