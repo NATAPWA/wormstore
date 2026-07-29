@@ -180,3 +180,15 @@ footer {
 button {
     box-sizing: border-box;
 }
+.worm-crawler {
+    position: fixed;
+    bottom: 0;
+    left: -100px;
+    font-size: 24px;
+    animation: crawl 10s linear infinite;
+    z-index: 999;
+}
+@keyframes crawl {
+    0% { left: -100px; }
+    100% { left: calc(100% + 100px); }
+}
