@@ -14,20 +14,13 @@ header {
     margin-bottom: 30px;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin: 0;
-    background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00cc44, #0088ff, #8800ff, #ff0000);
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: rainbow 5s linear infinite;
+h1 h1 {
+    animation: wiggle 2s ease-in-out infinite;
 }
-
-@keyframes rainbow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 400% 50%; }
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
 }
 
 /* Сетка карточек */
