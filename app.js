@@ -8,7 +8,7 @@
             showModal(
                 'Установите Червяк Jobs',
                 'Сейчас откроется Safari. Нажмите значок «Поделиться» (квадрат со стрелкой) внизу экрана. Затем нажмите на галочку «Показать больше» в правом углу и выберите «На экран Домой», нажмите «Добавить».',
-                'https://natapwa.github.io/wormstore/ '
+                'https://wormstore.ru/'
             );
         });
     }
@@ -53,12 +53,11 @@
                     url = 'https://www.avito.ru';
                 } else if (app === 'youmoney') {
                     name = 'ЮMoney';
-                    url = 'https://yoomoney.ru/';
+                    url = 'https://yoomoney.ru/wallet';
                 } else if (app === 'dzen') {
                     name = 'Дзен';
                     url = 'https://dzen.ru';
                 } else {
-                    // Неизвестное приложение — игнорируем без ошибки
                     return;
                 }
 
@@ -98,7 +97,6 @@ function showModal(title, text, url) {
     modal.querySelector('.close-btn').onclick = function() { modal.remove(); };
     modal.onclick = function(e) { if (e.target === modal) modal.remove(); };
     modal.querySelector('#goToSafariBtn').onclick = function() {
-        // Открываем ссылку через создание элемента <a> — работает везде
         var a = document.createElement('a');
         a.href = url;
         a.target = '_blank';
@@ -109,3 +107,13 @@ function showModal(title, text, url) {
         modal.remove();
     };
 }
+
+// ========== Кнопка обновления (оставлена для удобства) ==========
+(function() {
+    var refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            window.location.reload();
+        });
+    }
+})();
