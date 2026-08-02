@@ -180,3 +180,18 @@ footer {
 button {
     box-sizing: border-box;
 }
+.contact-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.2s;
+}
+.contact-btn:hover {
+    opacity: 0.9;
+}
