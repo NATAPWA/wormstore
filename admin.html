@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка — Червяк Jobs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🔒 Админ-панель</h1>
+        <p><a href="/" style="color: #58a6ff;">← Назад в магазин</a></p>
+    </header>
+    <main style="max-width: 500px; margin: 0 auto; padding: 20px; text-align: center;">
+        <div id="authBlock">
+            <h2>Введите пароль</h2>
+            <input type="password" id="passwordInput" placeholder="Пароль" style="width: 100%; padding: 12px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #c9d1d9; margin-bottom: 10px;">
+            <button id="loginBtn" class="install-main-btn" style="width: auto; padding: 10px 30px;">Войти</button>
+            <p id="errorMsg" style="color: #da3633; margin-top: 10px; display: none;">Неверный пароль</p>
+        </div>
+        <div id="statsBlock" style="display: none;">
+            <h2>📊 Статистика проекта</h2>
+            <div class="counter-box" style="background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 20px; margin: 20px 0;">
+                <p>Всего уникальных посетителей: <strong id="totalVisitors">—</strong></p>
+                <p>Посещений за сегодня: <strong id="todayVisitors">—</strong></p>
+            </div>
+            <button id="resetBtn" class="install-main-btn" style="background: #da3633; width: auto; padding: 10px 30px;">Сбросить счётчик</button>
+            <p id="resetMsg" style="color: #4caf50; margin-top: 10px; display: none;">Счётчик сброшен</p>
+        </div>
+    </main>
+    <footer>
+        <p>🐛 Червяк Jobs. Stay hungry, stay wormy.</p>
+    </footer>
+    <script>
+        const ADMIN_PASSWORD = 'WormJobs2024!'; // Замени на свой надёжный пароль
+        const NAMESPACE = 'wormstore';
+        const KEY = 'visitors';
+        const TODAY_KEY = 'visitors_today';
+
+        // Проверка пароля
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const password = document.getElementById('passwordInput').value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('authBlock').style.display = 'none';
+                document.getElementById('statsBlock').style.display = 'block';
+                loadStats();
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        });
+
+        async function loadStats() {
+            try {
+                // Получаем общее количество
+                const totalRes = await fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`);
+                const totalData = await totalRes.json();
+                document.getElementById('totalVisitors').textContent = totalData.value || 0;
+
+                // Получаем счётчик за сегодня (если реализовано в CountAPI — нет, поэтому показываем N/A)
+                // Вместо этого можно вывести просто метку времени последнего сброса, если сделать свой сервер.
+                document.getElementById('todayVisitors').textContent = 'см. в общем счётчике (данные за всё время)';
+            } catch (error) {
+                console.error('Ошибка загрузки статистики:', error);
+            }
+        }
+
+        // Сброс счётчика
+        document.getElementById('resetBtn').addEventListener('click', async () => {
+            if (confirm('Вы уверены, что хотите сбросить глобальный счётчик?')) {
+                try {
+                    await fetch(`https://api.countapi.xyz/set/${NAMESPACE}/${KEY}?value=0`);
+                    document.getElementById('resetMsg').style.display = 'block';
+                    setTimeout(() => document.getElementById('resetMsg').style.display = 'none', 3000);
+                    loadStats();
+                } catch (error) {
+                    alert('Ошибка сброса счётчика');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
