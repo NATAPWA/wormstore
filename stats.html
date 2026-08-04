@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Пульс Червяка — Статистика</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Анимация пульса — как бьющееся сердце */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.08); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.04); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        .big-counter {
+            font-size: 120px;
+            font-weight: 900;
+            color: #4caf50;
+            text-shadow: 0 0 30px rgba(76, 175, 80, 0.6);
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+            cursor: default; /* пока не кликается, но выглядит маняще */
+            user-select: none;
+        }
+        .hint {
+            color: #8b949e;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,33 +38,34 @@
         <p><a href="/" style="color: #58a6ff;">← Назад в магазин</a></p>
     </header>
     <main style="max-width: 500px; margin: 0 auto; padding: 20px; text-align: center;">
-        <div class="counter-box" style="background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 40px 20px; margin-bottom: 30px;">
-            <p style="color: #8b949e; margin: 0 0 10px;">Уникальных посетителей:</p>
-            <p id="visitorCount" style="font-size: 48px; font-weight: bold; color: #4caf50; margin: 0;">...</p>
+        <div class="counter-box" style="background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 20px;">
+            <p style="color: #8b949e; margin: 0;">Уникальных посетителей:</p>
+            <div id="visitorCount" class="big-counter">…</div>
+            <p class="hint">Червяк растёт с каждым гостем! 🐛💚</p>
         </div>
-        <p style="color: #8b949e; font-size: 14px;">
-            Счётчик обновляется при каждом новом госте.<br>
-            Данные хранятся глобально.
+        <p style="color: #8b949e; font-size: 14px; margin-top: 20px;">
+            Скоро здесь можно будет «топать» и зарабатывать очки.<br>
+            А пока — просто смотри, как бьётся сердце проекта.
+        </p>
+        <p style="margin-top: 20px;">
+            <a href="admin.html" style="color: #8b949e; text-decoration: none; font-size: 12px;">🔒 Админка</a>
         </p>
     </main>
     <footer>
         <p>🐛 Червяк Jobs. Stay hungry, stay wormy.</p>
     </footer>
     <script>
-        // Уникальный ключ для нашего проекта в CountAPI
         const NAMESPACE = 'wormstore';
         const KEY = 'visitors';
 
         async function fetchCount() {
             try {
-                // Увеличиваем счётчик при заходе (только если ещё не считали в этой сессии)
                 if (!sessionStorage.getItem('counted')) {
                     const response = await fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
                     const data = await response.json();
                     document.getElementById('visitorCount').textContent = data.value;
                     sessionStorage.setItem('counted', 'true');
                 } else {
-                    // Просто получаем текущее значение
                     const response = await fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`);
                     const data = await response.json();
                     document.getElementById('visitorCount').textContent = data.value;
@@ -50,7 +77,6 @@
         }
 
         fetchCount();
-        // Автообновление каждые 30 секунд
         setInterval(fetchCount, 30000);
     </script>
 </body>
