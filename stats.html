@@ -14,48 +14,44 @@
     <main style="max-width: 500px; margin: 0 auto; padding: 20px; text-align: center;">
         <div class="counter-box" style="background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 40px 20px; margin-bottom: 30px;">
             <p style="color: #8b949e; margin: 0 0 10px;">Уникальных посетителей:</p>
-            <p id="visitorCount" style="font-size: 48px; font-weight: bold; color: #4caf50; margin: 0;">0</p>
+            <p id="visitorCount" style="font-size: 48px; font-weight: bold; color: #4caf50; margin: 0;">...</p>
         </div>
         <p style="color: #8b949e; font-size: 14px;">
-            Счётчик обновляется в реальном времени.<br>
-            Каждый новый гость добавляет +1 к пульсу Червяка.
-        </p>
-        <p style="margin-top: 30px;">
-            <a href="/" class="install-main-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 10px 30px;">Вернуться в магазин</a>
+            Счётчик обновляется при каждом новом госте.<br>
+            Данные хранятся глобально.
         </p>
     </main>
     <footer>
         <p>🐛 Червяк Jobs. Stay hungry, stay wormy.</p>
     </footer>
     <script>
-        // Счётчик на основе localStorage + уникальный идентификатор
-        function updateCounter() {
-            const STORAGE_KEY = 'wormstore_visitor';
-            const COUNT_KEY = 'wormstore_total_count';
-            
-            // Проверяем, заходил ли этот пользователь раньше
-            const hasVisited = localStorage.getItem(STORAGE_KEY);
-            
-            if (!hasVisited) {
-                // Новый посетитель: помечаем его и увеличиваем счётчик
-                localStorage.setItem(STORAGE_KEY, 'true');
-                
-                // Получаем текущее общее количество
-                let totalCount = parseInt(localStorage.getItem(COUNT_KEY) || '0');
-                totalCount++;
-                localStorage.setItem(COUNT_KEY, totalCount.toString());
+        // Уникальный ключ для нашего проекта в CountAPI
+        const NAMESPACE = 'wormstore';
+        const KEY = 'visitors';
+
+        async function fetchCount() {
+            try {
+                // Увеличиваем счётчик при заходе (только если ещё не считали в этой сессии)
+                if (!sessionStorage.getItem('counted')) {
+                    const response = await fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
+                    const data = await response.json();
+                    document.getElementById('visitorCount').textContent = data.value;
+                    sessionStorage.setItem('counted', 'true');
+                } else {
+                    // Просто получаем текущее значение
+                    const response = await fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`);
+                    const data = await response.json();
+                    document.getElementById('visitorCount').textContent = data.value;
+                }
+            } catch (error) {
+                document.getElementById('visitorCount').textContent = '—';
+                console.error('Ошибка загрузки счётчика:', error);
             }
-            
-            // Отображаем общее количество
-            const count = localStorage.getItem(COUNT_KEY) || '0';
-            document.getElementById('visitorCount').textContent = count;
         }
-        
-        // Запускаем при загрузке страницы
-        updateCounter();
-        
-        // Автообновление каждые 30 секунд (на случай, если несколько вкладок)
-        setInterval(updateCounter, 30000);
+
+        fetchCount();
+        // Автообновление каждые 30 секунд
+        setInterval(fetchCount, 30000);
     </script>
 </body>
 </html>
